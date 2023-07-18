@@ -1,7 +1,7 @@
 # Личный проект «TaskForce»
 
 * Студент: [Дмитрий Боченков](https://up.htmlacademy.ru/nodejs-2/4/user/2101165).
-* Наставник: `Неизвестно`.
+* Наставник: [Евгений Наумов](https://htmlacademy.ru/profile/naumov_evg).
 
 ---
 
