@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpStatus, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Param, Patch, Post } from '@nestjs/common';
 import { fillObject } from '@project/util/util-core';
 import { TaskRdo } from './rdo/task.rdo';
 import { TaskService } from './task.service';
@@ -37,7 +37,7 @@ export class TaskController {
     status: HttpStatus.CREATED,
     description: 'The task has been successfully updated.'
   })
-  @Patch('update/:id')
+  @Patch(':id')
   public async update(@Body() dto: UpdateTaskDto, @Param('id') id: string) {
     const task = await this.taskService.update(id, dto);
     return fillObject(TaskRdo, task);
@@ -47,7 +47,7 @@ export class TaskController {
     status: HttpStatus.OK,
     description: 'Task deleted'
   })
-  @Post('delete/:id')
+  @Delete(':id')
   public async delete(@Param('id') id: string) {
     await this.taskService.delete(id);
   }

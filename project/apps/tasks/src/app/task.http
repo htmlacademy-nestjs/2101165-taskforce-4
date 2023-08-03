@@ -24,13 +24,13 @@ GET http://localhost:3000/api/tasks/cb9319ed-8532-4fcf-8788-c7a8fc6d2ff2 HTTP/1.
 
 
 # Delete task by ID
-POST http://localhost:3000/api/tasks/delete/cb9319ed-8532-4fcf-8788-c7a8fc6d2ff2 HTTP/1.1
+DELETE http://localhost:3000/api/tasks/7eb8b2d7-8191-4fa8-b361-ebfcccd820f6 HTTP/1.1
 
 ###
 
 
 # Update a task
-PATCH  http://localhost:3000/api/tasks/update/cb9319ed-8532-4fcf-8788-c7a8fc6d2ff2 HTTP/1.1
+PATCH  http://localhost:3000/api/tasks/bfeb6546-fec5-4179-b61d-d0849bf26266 HTTP/1.1
 Content-Type: application/json
 
 {

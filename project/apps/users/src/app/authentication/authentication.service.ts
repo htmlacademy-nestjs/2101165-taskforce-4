@@ -1,7 +1,7 @@
 import { ConflictException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { TaskUserMemoryRepository } from '../task-user/task-user-memory.repository';
 import dayjs from 'dayjs';
-import { AUTH_USER_EXISTS, AUTH_USER_NOT_FOUND, AUTH_USER_PASSWORD_WRONG } from './authentication.constant';
+import { AuthAnswers } from './authentication.constant';
 import { CreateUserDto } from './dto/create-user.dto';
 import { TaskUserEntity } from '../task-user/task-user.entity';
 import { LoginUserDto } from './dto/login-user.dto';
@@ -25,7 +25,7 @@ export class AuthenticationService {
       .findByEmail(email);
 
     if (existUser) {
-      throw new ConflictException(AUTH_USER_EXISTS);
+      throw new ConflictException(AuthAnswers.AUTH_USER_EXISTS);
     }
 
     const userEntity = await new TaskUserEntity(taskUser)
@@ -40,12 +40,12 @@ export class AuthenticationService {
     const existUser = await this.taskUserRepository.findByEmail(email);
 
     if (!existUser) {
-      throw new NotFoundException(AUTH_USER_NOT_FOUND);
+      throw new NotFoundException(AuthAnswers.AUTH_USER_NOT_FOUND);
     }
 
     const blogUserEntity = new TaskUserEntity(existUser);
     if (!await blogUserEntity.comparePassword(password)) {
-      throw new UnauthorizedException(AUTH_USER_PASSWORD_WRONG);
+      throw new UnauthorizedException(AuthAnswers.AUTH_USER_PASSWORD_WRONG);
     }
 
     return blogUserEntity.toObject();
