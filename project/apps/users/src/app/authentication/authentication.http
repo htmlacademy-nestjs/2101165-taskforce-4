@@ -8,13 +8,14 @@ Content-Type: application/json
   "firstname": "Keks",
   "lastname": "Smith",
   "password": "123456",
-  "city": "Moscow"
+  "city": "Moscow",
+  "role": "executor"
 }
 
 ###
 
 # Get user by ID
-GET http://localhost:3000/api/auth/f828c760-cd85-431b-a86b-989d71e50d8a HTTP/1.1
+GET http://localhost:3000/api/auth/64d0bfd7439a6b47c9903215 HTTP/1.1
 
 ###
 
