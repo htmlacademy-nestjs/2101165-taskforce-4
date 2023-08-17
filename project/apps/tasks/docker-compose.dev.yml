@@ -1,0 +1,42 @@
+version: '3.5'
+services:
+  project.tasks.postgres:
+    image: postgres:14-alpine
+    container_name: project.tasks.postgres
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: test
+      POSTGRES_DB: project-tasks
+    ports:
+      - 5432:5432
+    volumes:
+      - project.postgres.tasks:/var/lib/postgresql/data
+
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U admin -d test" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+    networks:
+      - project.tasks
+
+  project.tasks.pgadmin:
+    image: dpage/pgadmin4
+    container_name: project.tasks.pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "keks@htmlacademy.local"
+      PGADMIN_DEFAULT_PASSWORD: "test"
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+    ports:
+      - 8082:80
+    networks:
+      - project.tasks
+
+volumes:
+  project.postgres.tasks:
+
+networks:
+  project.tasks:
+      driver: bridge
