@@ -5,7 +5,7 @@ Content-Type: application/json
 {
   "name": "dskjhfk",
   "description": "sdlkjf",
-  "category": "Стрижка",
+  "category": [1],
   "price": "100",
   "tillDate": "2023-10-22",
   "city": "Moscow",
