@@ -33,7 +33,7 @@ export class TaskCategoryController {
   @Delete('/:id')
   @HttpCode(HttpStatus.NO_CONTENT)
   async destroy(@Param('id') id: string) {
-    const categoryId = parseInt(id, 10);
+    const categoryId = await parseInt(id, 10);
     this.taskCategoryService.deleteCategory(categoryId);
   }
 

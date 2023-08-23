@@ -14,7 +14,7 @@ async function fillDb() {
             taskId: 1,
             title: 'Ремонт кухни',
             description: 'Нужно отремонтировать пол и потолок на кухне.',
-            price: '1000',
+            price: 1000,
             tillDate: 'tomorrow',
             picture: '',
             address: 'Moscow, Cremlin',

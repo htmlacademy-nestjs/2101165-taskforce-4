@@ -11,7 +11,7 @@ export class TaskCategoryEntity implements Entity<TaskCategoryEntity>, Category 
 
   public fillEntity(entity: Category) {
     this.title = entity.title;
-    this.id = entity.id;
+    this.id = entity.categoryId;
   }
 
   public toObject(): TaskCategoryEntity {

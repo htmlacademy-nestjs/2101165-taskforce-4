@@ -16,7 +16,7 @@ model Task {
   title       String   @default("")
   description String   @default("")
   category    Category[]
-  price       String   @default("")
+  price       Int   
   tillDate    String   @default("") @map("till_date")
   picture     String   @default("")
   address     String   @default("")
