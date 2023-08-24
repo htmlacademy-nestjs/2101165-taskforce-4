@@ -6,9 +6,9 @@ export class TaskPostEntity implements Entity<TaskPostEntity> ,Task {
   public title: string;
   public description: string;
   public category: Category[];
-  public price?: number;
+  public price: number;
   public tillDate?: Date;
-  public city: City;
+  public city: string;
   public picture: string;
   public publishedAt: Date;
   public createdAt: Date;

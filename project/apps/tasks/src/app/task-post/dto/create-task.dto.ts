@@ -1,11 +1,9 @@
-import { City } from "@project/shared/app-types";
-
 export class CreateTaskDto {
-  public name: string;
+  public title: string;
   public description: string;
-  public price?: number;
+  public price: number;
   public address?: string;
-  public city: City;
+  public city: string;
   public userId: string;
   public category: number[];
   public tags?: string[];

@@ -12,39 +12,38 @@ datasource db {
 }
 
 model Task {
-  taskId      Int      @id @default(autoincrement()) @map("task_id")
-  title       String   @default("")
-  description String   @default("")
-  category    Category @relation(fields: [categoryId], references: [categoryId])
-  categoryId  Int
+  taskId      Int        @id @default(autoincrement()) @map("task_id")
+  title       String     @default("")
+  description String     @default("")
+  category    Category[] 
   price       Int   
-  tillDate    String   @default("") @map("till_date")
-  picture     String   @default("")
-  address     String   @default("")
+  tillDate    DateTime?  @map("till_date")
+  picture     String     @default("")
+  address     String     @default("")
   tags        Tag[]
-  city        String   @default("")
-  userId      String?  @default("") @map("user_id")
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @updatedAt @map("updated_at")
+  city        String     @default("")
+  userId      String?    @default("") @map("user_id")
+  createdAt   DateTime   @default(now()) @map("created_at")
+  updatedAt   DateTime   @updatedAt @map("updated_at")
   comments    Comment[]
   @@map("tasks")
 }
 
 model Category {
-  categoryId Int    @id @default(autoincrement()) @map("category_id")
-  title      String @unique
+  categoryId Int         @id @default(autoincrement()) @map("category_id")
+  title      String      @unique
   tasks      Task[]
   @@map("categories")
 }
 
 model Comment {
-  commentId Int      @id @default(autoincrement()) @map("comment_id")
+  commentId Int          @id @default(autoincrement()) @map("comment_id")
   message   String
   userId    String?      @map("user_id")
-  task      Task     @relation(fields: [taskId], references: [taskId], onDelete: Cascade, onUpdate: Cascade)
-  taskId    Int      @map("task_id")
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+  task      Task         @relation(fields: [taskId], references: [taskId], onDelete: Cascade, onUpdate: Cascade)
+  taskId    Int          @map("task_id")
+  createdAt DateTime     @default(now()) @map("created_at")
+  updatedAt DateTime     @updatedAt @map("updated_at")
   @@map("comments")
 }
 

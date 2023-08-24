@@ -21,19 +21,6 @@ export class TaskPostService {
     return this.taskPostRepository.create(postEntity);
   }
 
-
-  // public async update(id: string, dto: UpdateTaskDto) {
-  //   const existTask = await this.taskPostRepository.findById(id);
-
-  //   if (!existTask) {
-  //     throw new NotFoundException(TASK_NOT_FOUND);
-  //   }
-
-  //   const newTaskEntity = await new TaskPostEntity({...existTask, ...dto});
-
-  //   return await this.taskPostRepository.update(id, newTaskEntity);
-  // }
-
   public async delete(id: string) {
     const existTask = await this.taskPostRepository.findById(id);
 

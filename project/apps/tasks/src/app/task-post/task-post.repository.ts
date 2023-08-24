@@ -49,7 +49,9 @@ export class TaskPostRepository implements CRUDRepository<TaskPostEntity, number
   public find(ids: number[] = []): Promise<Task[]> {
     return this.prisma.task.findMany({
       where: {
-        taskId
+        taskId: {
+          in: ids 
+        } 
       },
       include: {
         comments: true,
