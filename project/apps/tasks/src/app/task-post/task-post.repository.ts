@@ -16,13 +16,14 @@ export class TaskPostRepository implements CRUDRepository<TaskPostEntity, number
         comments: {
           connect: []
         },
+        tags: {
+          connect: []
+        },
         category: {
           connect: entityData.category
             .map(({ categoryId }) => ({ categoryId }))
         },
-        tags: {
-          connect: []
-        },
+        
       },
       include: {
         comments: true,
@@ -32,32 +33,40 @@ export class TaskPostRepository implements CRUDRepository<TaskPostEntity, number
     });
   }
 
-  public async destroy(taskId: number): Promise<void> {
-    await this.prisma.task.delete({
-
-    });
-  }
-
-  public findById(taskId: number): Promise<Task | null> {
+  public async findById(taskId: number): Promise<Task | null> {
     return this.prisma.task.findFirst({
-      
+      where: {
+        taskId
+      },
+      include: {
+        comments: true,
+        category: true,
+        tags: true,
+      }
     });
   }
 
   public find(ids: number[] = []): Promise<Task[]> {
     return this.prisma.task.findMany({
       where: {
-        
+        taskId
+      },
+      include: {
+        comments: true,
+        category: true,
+        tags: true,
       }
     });
   }
 
-  public update(taskId: number, item: TaskPostEntity): Promise<Task> {
-    return this.prisma.task.update({
-      where: {
-        taskId
-      },
-      data: { ...item.toObject(), taskId}
-    });
+  public async update(id: number, item: TaskPostEntity): Promise<Task> {
+    throw new Error("Method not implemented.");
   }
+
+  public async destroy(taskId: number): Promise<void> {
+    await this.prisma.task.delete({
+      where: {taskId}
+    })
+  }
+
 }

@@ -15,7 +15,8 @@ model Task {
   taskId      Int      @id @default(autoincrement()) @map("task_id")
   title       String   @default("")
   description String   @default("")
-  category    Category[]
+  category    Category @relation(fields: [categoryId], references: [categoryId])
+  categoryId  Int
   price       Int   
   tillDate    String   @default("") @map("till_date")
   picture     String   @default("")
@@ -31,7 +32,7 @@ model Task {
 
 model Category {
   categoryId Int    @id @default(autoincrement()) @map("category_id")
-  title      String
+  title      String @unique
   tasks      Task[]
   @@map("categories")
 }
