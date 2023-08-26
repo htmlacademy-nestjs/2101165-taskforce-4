@@ -3,7 +3,7 @@ POST http://localhost:3000/api/categories HTTP/1.1
 Content-Type: application/json
 
 {
-  "title": "6"
+  "title": "New cat 2"
 }
 
 ###
