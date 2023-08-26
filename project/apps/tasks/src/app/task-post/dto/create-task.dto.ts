@@ -7,6 +7,6 @@ export class CreateTaskDto {
   public userId: string;
   public category: number[];
   public tags?: string[];
-  public tillDate?: Date;
+  public tillDate?: string;
   public image?: string;
 }

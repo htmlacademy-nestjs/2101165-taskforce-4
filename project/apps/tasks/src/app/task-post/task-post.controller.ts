@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpStatus, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Param, ParseIntPipe, Post } from '@nestjs/common';
 import { fillObject } from '@project/util/util-core';
 import { TaskRdo } from './rdo/task.rdo';
 import { TaskPostService } from './task-post.service';
@@ -26,7 +26,7 @@ export class TaskPostController {
     description: 'Task found'
   })
   @Get(':id')
-  public async show(@Param('id') id: string) {
+  public async show(@Param('id', ParseIntPipe) id: number) {
     const existTask = await this.taskService.getTask(id);
     return fillObject(TaskRdo, existTask);
   }
@@ -36,7 +36,7 @@ export class TaskPostController {
     description: 'Task deleted'
   })
   @Delete(':id')
-  public async delete(@Param('id') id: string) {
+  public async delete(@Param('id', ParseIntPipe) id: number) {
     await this.taskService.delete(id);
   }
 }

@@ -5,8 +5,8 @@ Content-Type: application/json
 {
   "name": "dskjdsafsasasdfhfk",
   "description": "sdasdfdasflkjf",
-  "category": [3],
-  "price": "100",
+  "category": [1, 5],
+  "price": 100,
   "tillDate": "2023-10-22",
   "city": "Moscow",
   "picture": " ",

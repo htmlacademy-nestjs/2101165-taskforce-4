@@ -15,9 +15,10 @@ async function fillDb() {
             title: 'Ремонт кухни',
             description: 'Нужно отремонтировать пол и потолок на кухне.',
             price: 1000,
-            tillDate: 'tomorrow',
+            tillDate: new Date(),
             picture: '',
             address: 'Moscow, Cremlin',
+            publishedAt: new Date(),
             tags: {
               create: [
                 {
