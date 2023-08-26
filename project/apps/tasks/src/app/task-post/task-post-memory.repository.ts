@@ -1,14 +1,14 @@
 import { CRUDRepository } from '@project/util/util-types';
-import { TaskEntity } from './task.entity';
+import { TaskPostEntity } from './task-post.entity';
 import { Task } from '@project/shared/app-types';
 import { randomUUID } from 'node:crypto';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class TaskMemoryRepository implements CRUDRepository<TaskEntity, string, Task> {
+export class TaskPostMemoryRepository implements CRUDRepository<TaskPostEntity, string, Task> {
   private repository: Record<string, Task> = {};
 
-  public async create(item: TaskEntity): Promise<Task> {
+  public async create(item: TaskPostEntity): Promise<Task> {
     const entry = { ...item.toObject(), _id: randomUUID()};
     this.repository[entry._id] = entry;
 
@@ -27,8 +27,8 @@ export class TaskMemoryRepository implements CRUDRepository<TaskEntity, string, 
     delete this.repository[id];
   }
 
-  public async update(id: string, item: TaskEntity): Promise<Task> {
-    this.repository[id] = { ...item.toObject(), _id: id};
+  public async update(id: string, item: TaskPostEntity): Promise<Task> {
+    this.repository[id] = { ...item.toObject()};
     return this.findById(id);
   }
 }

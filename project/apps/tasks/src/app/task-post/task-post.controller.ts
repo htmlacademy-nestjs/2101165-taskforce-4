@@ -1,14 +1,13 @@
-import { Body, Controller, Delete, Get, HttpStatus, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Param, ParseIntPipe, Post } from '@nestjs/common';
 import { fillObject } from '@project/util/util-core';
 import { TaskRdo } from './rdo/task.rdo';
-import { TaskService } from './task.service';
+import { TaskPostService } from './task-post.service';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { ApiResponse } from '@nestjs/swagger';
-import { UpdateTaskDto } from './dto/update-task.dto';
 
 @Controller('tasks')
-export class TaskController {
-  constructor(private readonly taskService: TaskService) {}
+export class TaskPostController {
+  constructor(private readonly taskService: TaskPostService) {}
 
   @ApiResponse({
     type: TaskRdo,
@@ -27,20 +26,9 @@ export class TaskController {
     description: 'Task found'
   })
   @Get(':id')
-  public async show(@Param('id') id: string) {
+  public async show(@Param('id', ParseIntPipe) id: number) {
     const existTask = await this.taskService.getTask(id);
     return fillObject(TaskRdo, existTask);
-  }
-
-  @ApiResponse({
-    type: TaskRdo,
-    status: HttpStatus.CREATED,
-    description: 'The task has been successfully updated.'
-  })
-  @Patch(':id')
-  public async update(@Body() dto: UpdateTaskDto, @Param('id') id: string) {
-    const task = await this.taskService.update(id, dto);
-    return fillObject(TaskRdo, task);
   }
 
   @ApiResponse({
@@ -48,7 +36,7 @@ export class TaskController {
     description: 'Task deleted'
   })
   @Delete(':id')
-  public async delete(@Param('id') id: string) {
+  public async delete(@Param('id', ParseIntPipe) id: number) {
     await this.taskService.delete(id);
   }
 }

@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { City } from "@project/shared/app-types";
+import { Category, City, Tag } from "@project/shared/app-types";
 import { Expose } from "class-transformer";
 
 export class TaskRdo {
@@ -7,7 +7,7 @@ export class TaskRdo {
       description: 'The uniq task ID',
       example: '13'
   })
-  @Expose({ name: '_id' })
+  @Expose()
   public id: string;
 
   @ApiProperty({
@@ -29,7 +29,7 @@ export class TaskRdo {
       example: 'Cats'
   })
   @Expose()
-  public category: string;
+  public category: Category;
 
   @ApiProperty({
       description: 'Completion reward ',
@@ -64,7 +64,7 @@ export class TaskRdo {
       example: 'search,dance,squash'
   })
   @Expose()
-  public tags: string;
+  public tags: Tag;
 
   @ApiProperty({
       description: 'Task city',
