@@ -11,6 +11,6 @@ Content-Disposition: form-data; name="file"; filename="test.txt"
 ###
 
 # Get file by ID
-GET http://localhost:3000/api/files/64eb8a141edb3d6e6e6ab0ee HTTP/1.1
+GET http://localhost:3000/api/files/64ec3e75ebfcbdc3cf8d49dc HTTP/1.1
 
 ###

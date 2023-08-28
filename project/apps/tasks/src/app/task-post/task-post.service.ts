@@ -6,6 +6,8 @@ import { TaskPostEntity } from './task-post.entity';
 import dayjs from 'dayjs';
 import { TASK_NOT_FOUND } from './task-post.constant';
 import { TaskCategoryRepository } from '../task-category/task-category.repository';
+import { PostQuery } from './query/post.query';
+import { Task } from '@project/shared/app-types';
 
 @Injectable()
 export class TaskPostService {
@@ -45,5 +47,9 @@ export class TaskPostService {
     }
 
     return existTask;
+  }
+
+  public async getTasks(query: PostQuery): Promise<Task[]> {
+    return this.taskPostRepository.find(query);
   }
 }

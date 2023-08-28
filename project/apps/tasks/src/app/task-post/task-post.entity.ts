@@ -1,4 +1,4 @@
-import { Task, City, Category, Tag, Comment } from '@project/shared/app-types';
+import { Task, Category, Tag, Comment } from '@project/shared/app-types';
 import { Entity } from '@project/util/util-types';
 
 export class TaskPostEntity implements Entity<TaskPostEntity> ,Task {
