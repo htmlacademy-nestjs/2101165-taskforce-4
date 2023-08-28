@@ -16,8 +16,8 @@ Content-Type: application/json
 ###
 
 # Get user by ID
-GET http://localhost:3000/api/auth/64d0bfd7439a6bs47c9903215 HTTP/1.1
-
+GET http://localhost:3000/api/auth/64d0bfd7439a6b47c9903215 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NGQwYmZkNzQzOWE2YjQ3Yzk5MDMyMTUiLCJlbWFpbCI6InVzZXJAbm90Zm91bmQubG9jYWwiLCJyb2xlIjoiZXhlY3V0b3IiLCJsYXN0bmFtZSI6IlNtaXRoIiwiZmlyc3RuYW1lIjoiS2VrcyIsImlhdCI6MTY5MzIxNzM5NCwiZXhwIjoxNjk1ODA5Mzk0fQ.VhC4VHmbOR2B43bOXjJSf7mtHGri2WGEnw0KzA6TnzU
 ###
 
 # Login user by email and password
