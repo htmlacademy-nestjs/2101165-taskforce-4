@@ -8,14 +8,14 @@ export class TaskRdo {
       example: '13'
   })
   @Expose()
-  public id: string;
+  public taskId: string;
 
   @ApiProperty({
       description: 'Task name',
       example: 'Chek my friend bank account'
   })
   @Expose()
-  public name: string;
+  public title: string;
 
   @ApiProperty({
       description: 'Task description',

@@ -71,8 +71,34 @@ export class TaskPostRepository implements CRUDRepository<TaskPostEntity, number
     });
   }
 
-  public async update(id: number, item: TaskPostEntity): Promise<Task> {
-    throw new Error("Method not implemented.");
+  public async update(taskId: number, item: TaskPostEntity): Promise<Task> {
+    const entityData = item.toObject();
+    
+    await this.prisma.task.delete({
+      where: {taskId}
+    })
+
+    return this.prisma.task.create({
+      data: {
+        ...entityData,
+        comments: {
+          connect: []
+        },
+        tags: {
+          connect: []
+        },
+        category: {
+          connect: entityData.category
+            .map(({ categoryId }) => ({ categoryId }))
+        },
+        
+      },
+      include: {
+        comments: true,
+        category: true,
+        tags: true
+      }
+    });
   }
 
   public async destroy(taskId: number): Promise<void> {
