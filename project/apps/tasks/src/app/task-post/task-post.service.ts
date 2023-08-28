@@ -52,4 +52,19 @@ export class TaskPostService {
   public async getTasks(query: PostQuery): Promise<Task[]> {
     return this.taskPostRepository.find(query);
   }
+
+  public async updateTask(id: number, dto: UpdateTaskDto): Promise<Task> {
+    const existTask = await this.taskPostRepository.findById(id);
+    
+    if (!existTask) {
+      throw new NotFoundException(TASK_NOT_FOUND);
+    }
+
+    const updatedTask = new TaskPostEntity({
+      existTask,
+      ...dto
+     });
+
+    return this.taskPostRepository.create(updatedTask);
+  }
 }
