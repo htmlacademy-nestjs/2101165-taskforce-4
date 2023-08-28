@@ -7,7 +7,6 @@ export class CreateUserDto {
   @ApiProperty({
     description: 'User unique email address',
     example: 'user@user.ru',
-
   })
   @IsEmail({}, { message: AuthAnswers.AUTH_USER_EMAIL_NOT_VALID })
   public email: string;
