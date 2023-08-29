@@ -60,15 +60,15 @@ export class TaskPostService {
       throw new NotFoundException(TASK_NOT_FOUND);
     }
 
-    const newTaskEntity = await new TaskPostEntity({
+    const newTaskEntity = new TaskPostEntity({
       ...existTask, 
       ...dto,
       tillDate: existTask.tillDate,
-       category: existTask.category,
-       comments: [],
-       tags: []
+      category: existTask.category,
+      comments: [],
+      tags: []
     });
 
-    return await this.taskPostRepository.update(id, newTaskEntity);
+    return this.taskPostRepository.update(id, newTaskEntity);
   }
 }

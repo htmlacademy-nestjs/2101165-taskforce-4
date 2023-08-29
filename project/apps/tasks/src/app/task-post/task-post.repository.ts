@@ -72,15 +72,34 @@ export class TaskPostRepository implements CRUDRepository<TaskPostEntity, number
     });
   }
 
-  public async update(taskId: number, item: TaskPostEntity) {
-    return Promise.resolve(undefined);
-  }
-
-
   public async destroy(taskId: number): Promise<void> {
     await this.prisma.task.delete({
       where: {taskId}
     })
   }
 
+  public async update(taskId: number, item: TaskPostEntity) {
+    const entityData = item.toObject();
+    return this.prisma.task.update({
+      where: { taskId },
+      data: {
+        ...entityData,
+        comments: {
+          connect: []
+        },
+        tags: {
+          connect: []
+        },
+        category: {
+          connect: item.category
+            .map(({ categoryId }) => ({ categoryId }))
+        },
+      },
+      include: {
+        comments: true,
+        category: true,
+        tags: true
+      }
+    });
+  }
 }
