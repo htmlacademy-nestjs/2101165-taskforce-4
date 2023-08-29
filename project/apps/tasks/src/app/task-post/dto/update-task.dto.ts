@@ -55,6 +55,7 @@ export class UpdateTaskDto {
     description: 'Task category id',
     example: '1',
   })
+  @IsOptional()
   public category: number[];
 
   @ApiProperty({

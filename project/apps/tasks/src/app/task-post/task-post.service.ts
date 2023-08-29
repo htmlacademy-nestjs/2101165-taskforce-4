@@ -63,7 +63,7 @@ export class TaskPostService {
     const newTaskEntity = await new TaskPostEntity({
       ...existTask, 
       ...dto,
-      tillDate: dto.tillDate ? new Date(dto.tillDate) : undefined,
+      tillDate: existTask.tillDate,
        category: existTask.category,
        comments: [],
        tags: []

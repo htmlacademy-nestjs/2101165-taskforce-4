@@ -4,6 +4,7 @@ import { Injectable } from '@nestjs/common';
 import { CRUDRepository } from '@project/util/util-types';
 import { PrismaService } from '../prisma/prisma.service';
 import { PostQuery } from './query/post.query';
+import { UpdateTaskDto } from './dto/update-task.dto';
 
 @Injectable()
 export class TaskPostRepository implements CRUDRepository<TaskPostEntity, number, Task> {
@@ -71,35 +72,10 @@ export class TaskPostRepository implements CRUDRepository<TaskPostEntity, number
     });
   }
 
-  public async update(taskId: number, item: TaskPostEntity): Promise<Task> {
-    const entityData = item.toObject();
-    
-    await this.prisma.task.delete({
-      where: {taskId}
-    })
-
-    return this.prisma.task.create({
-      data: {
-        ...entityData,
-        comments: {
-          connect: []
-        },
-        tags: {
-          connect: []
-        },
-        category: {
-          connect: entityData.category
-            .map(({ categoryId }) => ({ categoryId }))
-        },
-        
-      },
-      include: {
-        comments: true,
-        category: true,
-        tags: true
-      }
-    });
+  public async update(taskId: number, item: TaskPostEntity) {
+    return Promise.resolve(undefined);
   }
+
 
   public async destroy(taskId: number): Promise<void> {
     await this.prisma.task.delete({
