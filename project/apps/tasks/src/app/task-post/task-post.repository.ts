@@ -3,6 +3,8 @@ import { Task } from '@project/shared/app-types';
 import { Injectable } from '@nestjs/common';
 import { CRUDRepository } from '@project/util/util-types';
 import { PrismaService } from '../prisma/prisma.service';
+import { PostQuery } from './query/post.query';
+import { UpdateTaskDto } from './dto/update-task.dto';
 
 @Injectable()
 export class TaskPostRepository implements CRUDRepository<TaskPostEntity, number, Task> {
@@ -46,23 +48,28 @@ export class TaskPostRepository implements CRUDRepository<TaskPostEntity, number
     });
   }
 
-  public find(ids: number[] = []): Promise<Task[]> {
+  public find({limit, category, sortDirection, page}: PostQuery): Promise<Task[]> {
     return this.prisma.task.findMany({
       where: {
-        taskId: {
-          in: ids 
-        } 
+        category: {
+          some: {
+            categoryId: {
+              in: category
+            }
+          }
+        }
       },
+      take: limit,
       include: {
         comments: true,
         category: true,
         tags: true,
-      }
+      },
+      orderBy: [
+        { createdAt: sortDirection }
+      ],
+      skip: page > 0 ? limit * (page - 1) : undefined,
     });
-  }
-
-  public async update(id: number, item: TaskPostEntity): Promise<Task> {
-    throw new Error("Method not implemented.");
   }
 
   public async destroy(taskId: number): Promise<void> {
@@ -71,4 +78,28 @@ export class TaskPostRepository implements CRUDRepository<TaskPostEntity, number
     })
   }
 
+  public async update(taskId: number, item: TaskPostEntity) {
+    const entityData = item.toObject();
+    return this.prisma.task.update({
+      where: { taskId },
+      data: {
+        ...entityData,
+        comments: {
+          connect: []
+        },
+        tags: {
+          connect: []
+        },
+        category: {
+          connect: item.category
+            .map(({ categoryId }) => ({ categoryId }))
+        },
+      },
+      include: {
+        comments: true,
+        category: true,
+        tags: true
+      }
+    });
+  }
 }

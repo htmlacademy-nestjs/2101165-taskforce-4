@@ -5,11 +5,14 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { TaskUserEntity } from '../task-user/task-user.entity';
 import { LoginUserDto } from './dto/login-user.dto';
 import { TaskUserMongoRepository } from '../task-user/task-user-mongo.repository';
+import { JwtService } from '@nestjs/jwt';
+import { TokenPayload, User } from '@project/shared/app-types';
 
 @Injectable()
 export class AuthenticationService {
   constructor(
-    private readonly taskUserRepository: TaskUserMongoRepository
+    private readonly taskUserRepository: TaskUserMongoRepository,
+    private readonly jwtService: JwtService,
   ) {}
 
   public async register(dto: CreateUserDto) {
@@ -53,5 +56,19 @@ export class AuthenticationService {
 
   public async getUser(id: string) {
     return this.taskUserRepository.findById(id);
+  }
+
+  public async createUserToken(user: User) {
+    const payload: TokenPayload = {
+      sub: user._id,
+      email: user.email,
+      role: user.role,
+      lastname: user.lastname,
+      firstname: user.firstname,
+    };
+
+    return {
+      accessToken: await this.jwtService.signAsync(payload),
+    }
   }
 }

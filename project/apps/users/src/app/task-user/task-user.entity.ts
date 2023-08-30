@@ -5,7 +5,7 @@ import { SALT_ROUNDS } from './task-user.constant';
 export class TaskUserEntity implements User {
   public _id: string;
   public avatar: string;
-  public city: City;
+  public city: string;
   public dateBirth: Date;
   public email: string;
   public firstname: string;

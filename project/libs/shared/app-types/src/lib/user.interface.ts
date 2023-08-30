@@ -6,7 +6,7 @@ export interface User {
   email: string;
   firstname: string;
   lastname: string;
-  city: City;
+  city: string;
   dateBirth: Date;
   avatar: string;
   passwordHash: string;
