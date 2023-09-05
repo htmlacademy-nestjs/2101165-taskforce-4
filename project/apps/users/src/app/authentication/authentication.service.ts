@@ -4,10 +4,10 @@ import { AuthAnswers } from './authentication.constant';
 import { CreateUserDto } from './dto/create-user.dto';
 import { TaskUserEntity } from '../task-user/task-user.entity';
 import { LoginUserDto } from './dto/login-user.dto';
-import { ConfigService, ConfigType } from '@nestjs/config';
+import { ConfigType } from '@nestjs/config';
 import { TaskUserMongoRepository } from '../task-user/task-user-mongo.repository';
 import { JwtService } from '@nestjs/jwt';
-import { User, UserRole } from '@project/shared/app-types';
+import { User } from '@project/shared/app-types';
 import { jwtConfig } from '@project/config/config-users';
 import { RefreshTokenService } from '../refresh-token/refresh-token.service';
 import { createJWTPayload } from '@project/util/util-core';
@@ -17,7 +17,6 @@ import * as crypto from 'node:crypto';
 export class AuthenticationService {
   constructor(
     private readonly taskUserRepository: TaskUserMongoRepository,
-    private readonly configService: ConfigService,
     private readonly jwtService: JwtService,
     @Inject (jwtConfig.KEY) private readonly jwtOptions: ConfigType<typeof jwtConfig>,
     private readonly refreshTokenService: RefreshTokenService,
