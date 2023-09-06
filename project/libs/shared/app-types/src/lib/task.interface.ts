@@ -1,9 +1,7 @@
-import { Category } from './category.interface';
-import { Comment } from './comment.interface';
-import { Tag } from './tag.interface';
+import { Category, Comment, Tag, Review, Response } from '../index';
 
 export interface Task {
-  id?: string;
+  taskId?: number;
   title: string;
   description: string;
   category: Category[];
@@ -17,4 +15,10 @@ export interface Task {
   comments?: Comment[];
   createdAt?: Date;
   publishAt?: Date;
+  executorId?: string;
+  responsesCount?: number;
+  commentsCount?: number;
+  responses?: Response[];
+  review?: Review;
+
 }
