@@ -1,4 +1,3 @@
-import { City } from './city.enum';
 import { UserRole } from './user-role.enum';
 
 export interface User {

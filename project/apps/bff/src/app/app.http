@@ -1,0 +1,36 @@
+# Login user by email and password
+POST http://localhost:4000/api/users/login HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "user@notfound.local",
+  "password": "123456"
+}
+
+###
+
+# Get new JWT pair
+POST http://localhost:4000/api/users/refresh HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NGYwZGQ0YmQwOTQwNzJmMGJlN2E3NTEiLCJlbWFpbCI6InVzZXJAbm90Zm91bmQubG9jYWwiLCJyb2xlIjoiZXhlY3V0b3IiLCJsYXN0bmFtZSI6IlNtaXRoIiwiZmlyc3RuYW1lIjoiS2VrcyIsInRva2VuSWQiOiIwNTk4MzgxMC1lOTg3LTQxOTUtODc0OC1mNjM3ZTAwN2M2YmMiLCJpYXQiOjE2OTM5Mzg0NjMsImV4cCI6MTY5NjUzMDQ2M30.8YDHZPNswnjtYjo984oBhydrJ0IVsjpwYLzC47xaB3I
+
+###
+
+# Create a new post
+POST http://localhost:4000/api/tasks HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NGYwZGQ0YmQwOTQwNzJmMGJlN2E3NTEiLCJlbWFpbCI6InVzZXJAbm90Zm91bmQubG9jYWwiLCJyb2xlIjoiZXhlY3V0b3IiLCJsYXN0bmFtZSI6IlNtaXRoIiwiZmlyc3RuYW1lIjoiS2VrcyIsImlhdCI6MTY5MzkzODQ3NywiZXhwIjoxNjkzOTM5MDc3fQ.g5vhEYRbpNPQCRQ9v74jc3atMSTj1UhaUp97S35-x-c
+Content-Type: application/json
+
+{
+  
+  "title": "name",
+  "description": "sdasdfdasflkjf",
+  "category": [1],
+  "price": 100,
+  "tillDate": "2023-10-22",
+  "city": "Moscow",
+  "picture": " ",
+  "address": " Arbat 1",
+  "tags": "new"
+}
+
+###
