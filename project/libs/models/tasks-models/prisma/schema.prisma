@@ -3,7 +3,7 @@
 
 generator client {
   provider = "prisma-client-js"
-  output = "../../../../node_modules/.prisma/client"
+  output   = "../../../../node_modules/.prisma/client"
 }
 
 datasource db {
@@ -12,39 +12,47 @@ datasource db {
 }
 
 model Task {
-  taskId      Int        @id @default(autoincrement()) @map("task_id")
-  title       String     @default("")
-  description String     @default("")
-  category    Category[] 
-  price       Int   
-  tillDate    DateTime?  @map("till_date")
-  picture     String     @default("")
-  address     String     @default("")
-  tags        Tag[]
-  city        String     @default("")
-  userId      String?    @default("") @map("user_id")
-  createdAt   DateTime   @default(now()) @map("created_at")
-  updatedAt   DateTime   @updatedAt @map("updated_at")
-  publishedAt DateTime   @map("published_at")
-  comments    Comment[]
+  taskId         Int        @id @default(autoincrement()) @map("task_id")
+  title          String     @default("")
+  description    String     @default("")
+  category       Category[]
+  price          Int
+  tillDate       DateTime?  @map("till_date")
+  picture        String     @default("")
+  address        String     @default("")
+  tags           Tag[]
+  city           String     @default("")
+  userId         String?    @default("") @map("user_id")
+  createdAt      DateTime   @default(now()) @map("created_at")
+  updatedAt      DateTime   @updatedAt @map("updated_at")
+  publishedAt    DateTime   @map("published_at")
+  comments       Comment[]
+  response       Response[]
+  responsesCount Int?       @default(0) @map("responses_count")
+  commentsCount  Int?       @default(0) @map("comments_count")
+  status         String     @default("New")
+  executorId     String?    @default("") @map("executor_id")
+
   @@map("tasks")
 }
 
 model Category {
-  categoryId Int         @id @default(autoincrement()) @map("category_id")
-  title      String      @unique
+  categoryId Int    @id @default(autoincrement()) @map("category_id")
+  title      String @unique
   tasks      Task[]
+
   @@map("categories")
 }
 
 model Comment {
-  commentId Int          @id @default(autoincrement()) @map("comment_id")
+  commentId Int      @id @default(autoincrement()) @map("comment_id")
   message   String
-  userId    String?      @map("user_id")
-  task      Task         @relation(fields: [taskId], references: [taskId], onDelete: Cascade, onUpdate: Cascade)
-  taskId    Int          @map("task_id")
-  createdAt DateTime     @default(now()) @map("created_at")
-  updatedAt DateTime     @updatedAt @map("updated_at")
+  userId    String?  @map("user_id")
+  task      Task     @relation(fields: [taskId], references: [taskId], onDelete: Cascade, onUpdate: Cascade)
+  taskId    Int      @map("task_id")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
   @@map("comments")
 }
 
@@ -55,5 +63,28 @@ model Tag {
   taskId    Int      @map("task_id")
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
+
   @@map("tags")
+}
+
+model Response {
+  responseId Int      @id @default(autoincrement()) @map("response_id")
+  offerPrice Int
+  task       Task     @relation(fields: [taskId], references: [taskId], onDelete: Cascade, onUpdate: Cascade)
+  taskId     Int      @map("task_id")
+  executorId String   @map("executor_id")
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  @@map("responses")
+}
+
+model Review {
+  reviewId   Int    @id @default(autoincrement()) @map("review_id")
+  taskId     Int    @map("task_id")
+  userId     String @map("user_id")
+  executorId String @map("executor_id")
+  review     String @default("")
+  rating     Int    @default(0)
+
+  @@map("reviews")
 }
