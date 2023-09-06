@@ -102,4 +102,12 @@ export class TaskPostRepository implements CRUDRepository<TaskPostEntity, number
       }
     });
   }
+
+  public async updateCommentsCounter(taskId: number, commentsCount: number) {
+    this.prisma.task.update({
+      where: { taskId },
+      data: { commentsCount },
+    });
+  }
+
 }

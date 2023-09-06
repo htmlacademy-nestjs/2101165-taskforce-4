@@ -71,4 +71,12 @@ export class TaskPostService {
 
     return this.taskPostRepository.update(id, newTaskEntity);
   }
+
+  async incrementCommentsCounter( taskId: number, increment: number): Promise<void> {
+    const task = await this.taskPostRepository.findById(taskId);
+    let count = task.commentsCount + increment;
+    count = count < 0 ? 0 : count;
+    return this.taskPostRepository.updateCommentsCounter(taskId, count);
+  }
+
 }
