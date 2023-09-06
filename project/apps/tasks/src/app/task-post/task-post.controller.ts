@@ -51,7 +51,7 @@ export class TaskPostController {
   @ApiResponse({
     type: TaskRdo,
     status: HttpStatus.OK,
-    description: 'Task has been updeted.'
+    description: 'Task has been updated.'
   })
   @Patch('/:id')
   async update(@Param('id') id: number, @Body() dto: UpdateTaskDto) {
