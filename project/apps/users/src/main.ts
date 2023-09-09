@@ -19,22 +19,21 @@ async function bootstrap() {
     .setVersion('1.0')
     .build();
 
-  const globalPrefix = 'api';
-  app.setGlobalPrefix(globalPrefix);
-
+  const GLOBAL_PREFIX = 'api';
   const configService = app.get(ConfigService);
-
   const document = SwaggerModule.createDocument(app, config);
+  const port = configService.get('application.port');
+  
+  app.setGlobalPrefix(GLOBAL_PREFIX);
+
   SwaggerModule.setup('spec', app, document);
 
   app.useGlobalPipes(new ValidationPipe());
   
-  const port = configService.get('application.port');
-  
   await app.listen(port);
   
   Logger.log(
-    `🚀 Application is running on: http://localhost:${port}/${globalPrefix}`
+    `🚀 Application is running on: http://localhost:${port}/${GLOBAL_PREFIX}`
   );
   Logger.log(
     `🎯  Current mode: ${configService.get('application.environment')}`

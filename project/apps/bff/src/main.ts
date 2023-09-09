@@ -19,17 +19,20 @@ async function bootstrap() {
     .setVersion('1.0')
     .build();
 
-  const globalPrefix = 'api';
-  app.setGlobalPrefix(globalPrefix);
-  app.useGlobalInterceptors(new RequestIdInterceptor());
-
+  const GLOBAL_PREFIX = 'api';
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('spec', app, document);
 
-  const port = process.env.PORT || 4000;
+  const DEFAULT_PORT = 4000;
+  const port = process.env.PORT || DEFAULT_PORT;
+  
+  app.setGlobalPrefix(GLOBAL_PREFIX);
+  app.useGlobalInterceptors(new RequestIdInterceptor());
+  
+  SwaggerModule.setup('spec', app, document);
+  
   await app.listen(port);
   Logger.log(
-    `🚀 Application is running on: http://localhost:${port}/${globalPrefix}`
+    `🚀 Application is running on: http://localhost:${port}/${GLOBAL_PREFIX}`
   );
 }
 
